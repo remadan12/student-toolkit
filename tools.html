@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Student Toolkit Tools — free study tools for students."
+    >
+
+    <meta name="theme-color" content="#2563eb">
+
+    <title>Tools | Student Toolkit</title>
+
+    <style>
+        :root {
+            --bg: #f3f7ff;
+            --card: #ffffff;
+            --text: #122033;
+            --muted: #64748b;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --line: #dbe5f2;
+            --soft: #eff6ff;
+            --success: #16a34a;
+            --danger: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                "Segoe UI",
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            border: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            margin-right: auto;
+            color: var(--text);
+        }
+
+        .nav a {
+            font-weight: 700;
+            color: var(--muted);
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--primary);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d4ed8 0%,
+                    #2563eb 45%,
+                    #6366f1 100%
+                );
+            color: white;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: auto;
+            padding: 65px 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.3rem, 6vw, 4rem);
+            margin: 0 0 10px;
+            letter-spacing: -0.05em;
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: 0;
+            color: #eaf1ff;
+            font-size: 1.05rem;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+
+        .section-title {
+            margin: 0 0 22px;
+        }
+
+        .section-title h2 {
+            margin: 0 0 5px;
+            font-size: 2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* =========================
+           GRID & CARDS
+        ========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow:
+                0 10px 25px rgba(15, 23, 42, 0.05);
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-top: 0;
+        }
+
+        .wide {
+            grid-column: 1 / -1;
+        }
+
+        /* =========================
+           FORMS
+        ========================= */
+
+        .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .field {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: white;
+            color: var(--text);
+            outline: none;
+        }
+
+        .field:focus {
+            border-color: var(--primary);
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea.field {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .btn {
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn.secondary {
+            background: var(--soft);
+            color: var(--primary-dark);
+        }
+
+        .btn.secondary:hover {
+            background: #dbeafe;
+        }
+
+        .btn.danger {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .btn.danger:hover {
+            background: #fecaca;
+        }
+
+        /* =========================
+           TIMER
+        ========================= */
+
+        .timer {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 15px 0;
+            letter-spacing: 0.04em;
+        }
+
+        .timer-status {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 15px;
+        }
+
+        .timer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* =========================
+           RESULTS
+        ========================= */
+
+        .result {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-top: 12px;
+            min-height: 28px;
+        }
+
+        .success {
+            color: var(--success);
+        }
+
+        .error {
+            color: var(--danger);
+        }
+
+        /* =========================
+           RESOURCES
+        ========================= */
+
+        .resource {
+            display: block;
+            padding: 13px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 700;
+            background: #fff;
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .resource:hover {
+            transform: translateY(-2px);
+            background: var(--soft);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            margin-top: 30px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+            .nav {
+                gap: 14px;
+                padding: 13px 15px;
+            }
+.nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-inner {
+                padding: 48px 20px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timer {
+                font-size: 2.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <header>
+        <div class="nav">
+
+            <a
+                class="logo"
+                href="index.html"
+                aria-label="Student Toolkit Home"
+            >
+                Student Toolkit
+            </a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a
+                href="tools.html"
+                class="active"
+                aria-current="page"
+            >
+                Tools
+            </a>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-inner">
+
+            <h1>Study Tools</h1>
+
+            <p>
+                Free, simple tools to help you focus,
+                organize your work, practice, and track
+                your academic progress.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <main>
+
+        <!-- =========================
+             PRODUCTIVITY
+        ========================== -->
+
+        <section>
+
+            <div class="section-title">
+
+                <h2>Productivity</h2>
+
+                <p>
+                    Tools for focused study sessions
+                    and organized learning.
+                </p>
+
+            </div>
+
+
+            <div class="grid">
+
+                <!-- TIMER -->
+
+                <article class="card">
+
+                    <h3>⏱ Focus Timer</h3>
+
+                    <p>
+                        Use a 25-minute focused study
+                        session followed by a short break.
+                    </p>
+
+                    <div
+                        class="timer"
+                        id="timer"
+                        aria-live="polite"
+                    >
+                        25:00
+                    </div>
+
+                    <div
+                        class="timer-status"
+                        id="timerStatus"
+                    >
+                        Ready to focus
+                    </div>
+
+                    <div class="timer-buttons">
+
+                        <button
+                            class="btn"
+                            id="startTimer"
+                            type="button"
+                        >
+                            Start
+                        </button>
+
+                        <button
+                            class="btn secondary"
+                            id="resetTimer"
+                            type="button"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NOTES -->
+
+                <article class="card">
+
+                    <h3>📝 Quick Notes</h3>
+
+                    <p>
+                        Write study notes and save them
+                        directly on this device.
+                    </p>
+
+                    <label for="notes">
+                        Your study notes
+                    </label>
+
+                    <textarea
+                        class="field"
+                        id="notes"
+                        placeholder="Write a study note..."
+                    ></textarea>
+
+                    <br><br>
+
+                    <button
+                        class="btn"
+                        id="saveNotes"
+                        type="button"
+                    >
+                        Save Notes
+                    </button>
+<button
+                        class="btn secondary"
+                        id="clearNotes"
+                        type="button"
+                    >
+                        Clear
+                    </button>
+
+                    <div
+                        class="timer-status"
+                        id="noteStatus"
+                        aria-live="polite"
+                    ></div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ACADEMIC TOOLS
+        ========================== -->
+
+        <section style="margin-top: 55px;">
+
+            <div class="section-title">
+
+                <h2>Academic Tools</h2>
+
+                <p>
+                    Quick calculations and study
+                    utilities for everyday learning.
+                </p>
+
+            </div>
+
+
+            <div class="grid">
+
+                <!-- CALCULATOR -->
+
+                <article class="card">
+
+                    <h3>🧮 Calculator</h3>
+
+                    <p>
+                        Perform basic mathematical
+                        calculations.
+                    </p>
+
+                    <label for="calc">
+                        Calculation
+                    </label>
+
+                    <input
+                        class="field"
+                        id="calc"
+                        inputmode="decimal"
+                        placeholder="Example: 25 * 4 + 10"
+                    >
+
+                    <br><br>
+
+                    <button
+                        class="btn"
+                        id="calculate"
+                        type="button"
+                    >
+                        Calculate
+                    </button>
+
+                    <div
+                        class="result"
+                        id="calcResult"
+                        aria-live="polite"
+                    ></div>
+
+                </article>
+
+
+                <!-- UNIT CONVERTER -->
+
+                <article class="card">
+
+                    <h3>📏 Unit Converter</h3>
+
+                    <p>
+                        Convert common units used in
+                        mathematics and science.
+                    </p>
+
+                    <label for="unitValue">
+                        Value
+                    </label>
+
+                    <input
+                        class="field"
+                        id="unitValue"
+                        type="number"
+                        placeholder="Enter value"
+                    >
+
+                    <br>
+
+                    <label for="unitType">
+                        Conversion
+                    </label>
+
+                    <select
+                        class="field"
+                        id="unitType"
+                    >
+
+                        <option value="km-mi">
+                            Kilometers → Miles
+                        </option>
+
+                        <option value="mi-km">
+                            Miles → Kilometers
+                        </option>
+
+                        <option value="kg-lb">
+                            Kilograms → Pounds
+                        </option>
+
+                        <option value="lb-kg">
+                            Pounds → Kilograms
+                        </option>
+
+                        <option value="c-f">
+                            Celsius → Fahrenheit
+                        </option>
+
+                        <option value="f-c">
+                            Fahrenheit → Celsius
+                        </option>
+
+                    </select>
+
+                    <br><br>
+
+                    <button
+                        class="btn"
+                        id="convert"
+                        type="button"
+                    >
+                        Convert
+                    </button>
+
+                    <div
+                        class="result"
+                        id="convertResult"
+                        aria-live="polite"
+                    ></div> 
+</article>
+
+
+                <!-- GRADE CALCULATOR -->
+
+                <article class="card">
+
+                    <h3>📊 Grade Calculator</h3>
+
+                    <p>
+                        Calculate your percentage and
+                        approximate letter grade.
+                    </p>
+
+                    <label for="earned">
+                        Points earned
+                    </label>
+
+                    <input
+                        class="field"
+                        id="earned"
+                        type="number"
+                        min="0"
+                        placeholder="Example: 85"
+                    >
+
+                    <br>
+
+                    <label for="total">
+                        Total points
+                    </label>
+
+                    <input
+                        class="field"
+                        id="total"
+                        type="number"
+                        min="1"
+                        placeholder="Example: 100"
+                    >
+
+                    <br><br>
+
+                    <button
+                        class="btn"
+                        id="grade"
+                        type="button"
+                    >
+                        Calculate Grade
+                    </button>
+
+                    <div
+                        class="result"
+                        id="gradeResult"
+                        aria-live="polite"
+                    ></div>
+
+                </article>
+
+
+                <!-- FLASHCARDS -->
+
+                <article class="card">
+
+                    <h3>🗂 Flashcards</h3>
+
+                    <p>
+                        Create simple question-and-answer
+                        cards for revision.
+                    </p>
+
+                    <label for="question">
+                        Question
+                    </label>
+
+                    <input
+                        class="field"
+                        id="question"
+                        placeholder="Example: What is HTML?"
+                    >
+
+                    <br>
+
+                    <label for="answer">
+                        Answer
+                    </label>
+
+                    <input
+                        class="field"
+                        id="answer"
+                        placeholder="Example: HyperText Markup Language"
+                    >
+
+                    <br><br>
+
+                    <button
+                        class="btn"
+                        id="saveCard"
+                        type="button"
+                    >
+                        Add Card
+                    </button>
+
+                    <button
+                        class="btn secondary"
+                        id="showCard"
+                        type="button"
+                    >
+                        Show Random Card
+                    </button>
+
+                    <div
+                        class="result"
+                        id="cardResult"
+                        aria-live="polite"
+                    ></div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RESOURCES
+        ========================== -->
+
+        <section style="margin-top: 55px;">
+
+            <div class="section-title">
+
+                <h2>Study Resources</h2>
+
+                <p>
+                    Reliable starting points for learning
+                    and practicing.
+                </p>
+
+            </div>
+
+
+            <div class="grid">
+
+                <article class="card wide">
+
+                    <a
+                        class="resource"
+                        href="https://www.khanacademy.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Khan Academy —
+                        Free lessons and practice
+                    </a>
+<a
+                        class="resource"
+                        href="https://developer.mozilla.org/en-US/docs/Learn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        MDN Web Docs —
+                        Learn HTML, CSS and JavaScript
+                    </a>
+
+                    <a
+                        class="resource"
+                        href="https://www.w3schools.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        W3Schools —
+                        Beginner-friendly web development references
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            Student Toolkit ·
+            Built as a student-focused web development project.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* -------------------------
+           HELPER
+        ------------------------- */
+
+        function getElement(id) {
+            return document.getElementById(id);
+        }
+
+
+        /* -------------------------
+           FOCUS TIMER
+        ------------------------- */
+
+        let timerSeconds = 25 * 60;
+        let timerRunning = false;
+        let timerInterval = null;
+
+
+        function updateTimerDisplay() {
+
+            const minutes =
+                String(
+                    Math.floor(timerSeconds / 60)
+                ).padStart(2, "0");
+
+            const seconds =
+                String(
+                    timerSeconds % 60
+                ).padStart(2, "0");
+
+            getElement("timer").textContent =
+                minutes + ":" + seconds;
+        }
+
+
+        getElement("startTimer").addEventListener(
+            "click",
+            function () {
+
+                if (timerRunning) {
+                    return;
+                }
+
+                timerRunning = true;
+
+                getElement("timerStatus").textContent =
+                    "Focus session running";
+
+                timerInterval = setInterval(
+                    function () {
+
+                        if (timerSeconds > 0) {
+
+                            timerSeconds--;
+
+                            updateTimerDisplay();
+
+                        } else {
+
+                            clearInterval(timerInterval);
+
+                            timerRunning = false;
+
+                            getElement(
+                                "timerStatus"
+                            ).textContent =
+                                "Session complete — take a break!";
+
+                        }
+
+                    },
+                    1000
+                );
+
+            }
+        );
+
+
+        getElement("resetTimer").addEventListener(
+            "click",
+            function () {
+
+                clearInterval(timerInterval);
+
+                timerRunning = false;
+
+                timerSeconds = 25 * 60;
+
+                updateTimerDisplay();
+
+                getElement(
+                    "timerStatus"
+                ).textContent =
+                    "Ready to focus";
+
+            }
+        );
+
+
+        /* -------------------------
+           NOTES
+        ------------------------- */
+
+        const savedNotes =
+            localStorage.getItem(
+                "studentToolkitNotes"
+            );
+
+        if (savedNotes !== null) {
+
+            getElement("notes").value =
+                savedNotes;
+
+        }
+
+
+        getElement("saveNotes").addEventListener(
+            "click",
+            function () {
+
+                localStorage.setItem(
+                    "studentToolkitNotes",
+                    getElement("notes").value
+                );
+https://developer.mozilla.org/en-US/docs/Learn
+getElement(
+                    "noteStatus"
+                ).textContent =
+                    "Saved on this device.";
+
+                getElement(
+                    "noteStatus"
+                ).className =
+                    "timer-status success";
+
+            }
+        );
+
+
+        getElement("clearNotes").addEventListener(
+            "click",
+            function () {
+
+                getElement("notes").value = "";
+
+                localStorage.removeItem(
+                    "studentToolkitNotes"
+                );
+
+                getElement(
+                    "noteStatus"
+                ).textContent =
+                    "Notes cleared.";
+
+                getElement(
+                    "noteStatus"
+                ).className =
+                    "timer-status";
+
+            }
+        );
+
+
+        /* -------------------------
+           CALCULATOR
+        ------------------------- */
+
+        getElement("calculate").addEventListener(
+            "click",
+            function () {
+
+                const expression =
+                    getElement("calc").value.trim();
+
+                const resultElement =
+                    getElement("calcResult");
+
+
+                if (expression === "") {
+
+                    resultElement.textContent =
+                        "Enter a calculation.";
+
+                    resultElement.className =
+                        "result error";
+
+                    return;
+                }
+
+
+                /*
+                    Only allow numbers and
+                    basic mathematical operators.
+                */
+
+                if (
+                    !/^[0-9+\-*/().%\s]+$/.test(
+                        expression
+                    )
+                ) {
+
+                    resultElement.textContent =
+                        "Only basic mathematical expressions are allowed.";
+
+                    resultElement.className =
+                        "result error";
+
+                    return;
+                }
+
+
+                try {
+
+                    const result =
+                        Function(
+                            "return (" +
+                            expression +
+                            ")"
+                        )();
+
+                    if (
+                        typeof result !== "number" ||
+                        !Number.isFinite(result)
+                    ) {
+                        throw new Error();
+                    }
+
+                    resultElement.textContent =
+                        "= " + result;
+
+                    resultElement.className =
+                        "result success";
+
+                } catch {
+
+                    resultElement.textContent =
+                        "Enter a valid calculation.";
+
+                    resultElement.className =
+                        "result error";
+
+                }
+
+            }
+        );
+
+
+        /* -------------------------
+           UNIT CONVERTER
+        ------------------------- */
+
+        getElement("convert").addEventListener(
+            "click",
+            function () {
+
+                const value =
+                    Number(
+                        getElement("unitValue").value
+                    );
+
+                const type =
+                    getElement("unitType").value;
+
+                const resultElement =
+                    getElement("convertResult");
+
+
+                if (!Number.isFinite(value)) {
+
+                    resultElement.textContent =
+                        "Enter a valid number.";
+
+                    resultElement.className =
+                        "result error";
+
+                    return;
+                }
+
+
+                let result;
+
+
+                switch (type) {
+
+                    case "km-mi":
+                        result = value * 0.621371;
+                        break;
+
+                    case "mi-km":
+                        result = value * 1.60934;
+                        break;
+case "kg-lb":
+                        result = value * 2.20462;
+                        break;
+
+                    case "lb-kg":
+                        result = value * 0.453592;
+                        break;
+
+                    case "c-f":
+                        result = (value * 9 / 5) + 32;
+                        break;
+
+                    case "f-c":
+                        result = (value - 32) * 5 / 9;
+                        break;
+
+                    default:
+                        result = null;
+                }
+
+
+                if (result === null) {
+
+                    resultElement.textContent =
+                        "Invalid conversion.";
+
+                    resultElement.className =
+                        "result error";
+
+                    return;
+                }
+
+
+                resultElement.textContent =
+                    result.toFixed(2);
+
+                resultElement.className =
+                    "result success";
+
+            }
+        );
+
+
+        /* -------------------------
+           GRADE CALCULATOR
+        ------------------------- */
+
+        getElement("grade").addEventListener(
+            "click",
+            function () {
+
+                const earned =
+                    Number(
+                        getElement("earned").value
+                    );
+
+                const total =
+                    Number(
+                        getElement("total").value
+                    );
+
+                const resultElement =
+                    getElement("gradeResult");
+
+
+                if (
+                    !Number.isFinite(earned) ||
+                    !Number.isFinite(total) ||
+                    total <= 0 ||
+                    earned < 0 ||
+                    earned > total
+                ) {
+
+                    resultElement.textContent =
+                        "Enter valid scores.";
+
+                    resultElement.className =
+                        "result error";
+
+                    return;
+                }
+
+
+                const percentage =
+                    (earned / total) * 100;
+
+
+                let letter;
+
+
+                if (percentage >= 90) {
+                    letter = "A";
+                } else if (percentage >= 80) {
+                    letter = "B";
+                } else if (percentage >= 70) {
+                    letter = "C";
+                } else if (percentage >= 60) {
+                    letter = "D";
+                } else {
+                    letter = "F";
+                }
+
+
+                resultElement.textContent =
+                    percentage.toFixed(1) +
+                    "% — " +
+                    letter;
+
+                resultElement.className =
+                    "result success";
+
+            }
+        );
+
+
+        /* -------------------------
+           FLASHCARDS
+        ------------------------- */
+
+        let flashcards =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentToolkitCards"
+                ) || "[]"
+            );
+
+
+        getElement("saveCard").addEventListener(
+            "click",
+            function () {
+
+                const question =
+                    getElement("question")
+                        .value
+                        .trim();
+
+                const answer =
+                    getElement("answer")
+                        .value
+                        .trim();
+
+
+                if (!question || !answer) {
+
+                    getElement(
+                        "cardResult"
+                    ).textContent =
+                        "Enter both a question and an answer.";
+
+                    getElement(
+                        "cardResult"
+                    ).className =
+                        "result error";
+
+                    return;
+                }
+
+
+                flashcards.push({
+                    question: question,
+                    answer: answer
+                });
+localStorage.setItem(
+                    "studentToolkitCards",
+                    JSON.stringify(flashcards)
+                );
+
+
+                getElement("question").value = "";
+
+                getElement("answer").value = "";
+
+
+                getElement(
+                    "cardResult"
+                ).textContent =
+                    flashcards.length +
+                    " card(s) saved.";
+
+                getElement(
+                    "cardResult"
+                ).className =
+                    "result success";
+
+            }
+        );
+
+
+        getElement("showCard").addEventListener(
+            "click",
+            function () {
+
+                const resultElement =
+                    getElement("cardResult");
+
+
+                if (flashcards.length === 0) {
+
+                    resultElement.textContent =
+                        "Add a flashcard first.";
+
+                    resultElement.className =
+                        "result error";
+
+                    return;
+                }
+
+
+                const randomIndex =
+                    Math.floor(
+                        Math.random() *
+                        flashcards.length
+                    );
+
+
+                const card =
+                    flashcards[randomIndex];
+
+
+                resultElement.textContent =
+                    card.question +
+                    " → " +
+                    card.answer;
+
+                resultElement.className =
+                    "result";
+
+            }
+        );
+
+
+        /* -------------------------
+           INITIALIZE
+        ------------------------- */
+
+        updateTimerDisplay();
+
+    </script>
+
+</body>
+</html>
