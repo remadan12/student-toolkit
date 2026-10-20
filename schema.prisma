@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+enum ProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum QuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+  FILL_BLANK
+  NUMERIC
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String
+  role         UserRole      @default(STUDENT)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  progress     Progress[]
+  attempts     QuizAttempt[]
+  toolSessions ToolSession[]
+}
+
+model Subject {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  grade     Int?
+  lessons   Lesson[]
+  createdAt DateTime @default(now())
+}
+
+model Lesson {
+  id          String     @id @default(cuid())
+  subjectId   String
+  title       String
+  slug        String
+  summary     String
+  content     Json
+  difficulty  Int        @default(1)
+  published   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  subject     Subject    @relation(fields: [subjectId], references: [id])
+  progress    Progress[]
+  quizzes     Quiz[]
+  @@unique([subjectId, slug])
+  @@index([subjectId, published])
+}
+
+model Quiz {
+  id        String     @id @default(cuid())
+  lessonId  String?
+  title     String
+  published Boolean    @default(false)
+  questions Question[]
+  attempts  QuizAttempt[]
+  lesson    Lesson?    @relation(fields: [lessonId], references: [id])
+  createdAt DateTime   @default(now())
+}
+
+model Question {
+  id          String       @id @default(cuid())
+  quizId      String
+  type        QuestionType
+  prompt      String
+  options     Json?
+  answerKey   Json
+  explanation String
+  points      Int          @default(1)
+  position    Int
+  quiz        Quiz         @relation(fields: [quizId], references: [id])
+  answers     AttemptAnswer[]
+  @@unique([quizId, position])
+}
+
+model QuizAttempt {
+  id          String          @id @default(cuid())
+  userId      String
+  quizId      String
+  score       Float?
+  maxScore    Float
+  startedAt   DateTime        @default(now())
+  completedAt DateTime?
+  user        User             @relation(fields: [userId], references: [id])
+  quiz        Quiz             @relation(fields: [quizId], references: [id])
+  answers     AttemptAnswer[]
+  @@index([userId, startedAt])
+}
+
+model AttemptAnswer {
+  id            String      @id @default(cuid())
+  attemptId     String
+  questionId    String
+  response      Json
+  isCorrect     Boolean?
+  pointsAwarded Float       @default(0)
+  answeredAt    DateTime    @default(now())
+  attempt       QuizAttempt @relation(fields: [attemptId], references: [id])
+  question      Question    @relation(fields: [questionId], references: [id])
+  @@unique([attemptId, questionId])
+}
+
+model Progress {
+  id              String         @id @default(cuid())
+  userId          String
+  lessonId        String
+  status          ProgressStatus @default(NOT_STARTED)
+  completionRatio Float          @default(0)
+  lastPosition    Int            @default(0)
+  lastAccessedAt  DateTime       @default(now())
+  completedAt     DateTime?
+  user            User            @relation(fields: [userId], references: [id])
+  lesson          Lesson          @relation(fields: [lessonId], references: [id])
+  @@unique([userId, lessonId])
+}
+
+model Tool {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  description String
+  config      Json
+  published   Boolean       @default(false)
+  sessions    ToolSession[]
+}
+
+model ToolSession {
+  id        String   @id @default(cuid())
+  userId    String
+  toolId    String
+  state     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  tool      Tool     @relation(fields: [toolId], references: [id])
+  @@index([userId, toolId, updatedAt])
+}
